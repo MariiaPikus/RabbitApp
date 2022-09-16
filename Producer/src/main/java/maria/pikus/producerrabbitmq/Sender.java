@@ -1,4 +1,4 @@
-package com.example.messagingrabbitmq;
+package maria.pikus.producerrabbitmq;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

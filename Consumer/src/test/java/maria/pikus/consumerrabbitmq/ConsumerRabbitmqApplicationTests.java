@@ -1,10 +1,10 @@
-package com.example.messagingrabbitmq;
+package maria.pikus.consumerrabbitmq;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MessagingRabbitmqApplicationTests {
+class ConsumerRabbitmqApplicationTests {
 
 	@Test
 	void contextLoads() {

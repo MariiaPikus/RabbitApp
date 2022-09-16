@@ -1,4 +1,4 @@
-package com.example.messagingrabbitmq;
+package maria.pikus.consumerrabbitmq;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
