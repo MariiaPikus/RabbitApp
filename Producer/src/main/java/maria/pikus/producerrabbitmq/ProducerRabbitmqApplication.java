@@ -8,5 +8,4 @@ public class ProducerRabbitmqApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProducerRabbitmqApplication.class, args);
     }
-
 }
