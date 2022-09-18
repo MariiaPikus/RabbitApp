@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -13,18 +13,17 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "increment")
+    @Column(name = "user_id")
     private Long id;
 
     private String username;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Message> messages;
+    private List<Message> messages;
 
-    @ElementCollection(targetClass = Status.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_status", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Status> roles;
+//    private String lastActiveDate;
+
 }
 
 

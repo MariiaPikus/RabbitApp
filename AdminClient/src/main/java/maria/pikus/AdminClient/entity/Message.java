@@ -12,13 +12,14 @@ import java.util.Set;
 @Table(schema = "public", name = "messagesTest")
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "increment")
+    @Column(name = "mess_id")
     private Long id;
 
     private String message;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private User user;
-
 
 }
