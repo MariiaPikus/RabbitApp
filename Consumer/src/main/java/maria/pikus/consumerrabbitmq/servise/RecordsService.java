@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MessageService {
+public class RecordsService {
 
     @Autowired
     MessageRepo messageRepo;
@@ -23,17 +23,17 @@ public class MessageService {
     Long timeServiceActive;
 
 
-    public void saveRecord (String msg) throws JsonProcessingException {
+    public void saveRecord(String msg) throws JsonProcessingException {
         ReceivedMessage receivedMessage = new ObjectMapper().readValue(msg, ReceivedMessage.class);
         String currentDataAndTime = LocalDateTime.now().toString();
         messageRepo.save(new Record(receivedMessage.getService(), currentDataAndTime));
     }
 
-    public List<String> findRegisterServices(){
+    public List<String> findRegisterServices() {
         return messageRepo.findDistinctServicedNames();
     }
 
-    public List<String> findActiveServices(){
+    public List<String> findActiveServices() {
         List<String> result = new ArrayList<>();
 
         LocalDateTime now = LocalDateTime.now();
@@ -43,7 +43,7 @@ public class MessageService {
         for (Record record : allServices) {
             LocalDateTime lastActiveTime = LocalDateTime.parse(record.getTimeAndDate());
             boolean isBefore = lastActiveTime.isBefore(forActiveTime);
-            if(isBefore){
+            if (isBefore) {
                 result.add(record.getService());
             }
         }
@@ -51,12 +51,12 @@ public class MessageService {
         return result;
     }
 
-    public List<Record> findByService(String service){
+    public List<Record> findByService(String service) {
         return messageRepo.findByService(service);
     }
 
-    public void delete(List<Record> records){
-        for (Record record: records) {
+    public void delete(List<Record> records) {
+        for (Record record : records) {
             messageRepo.delete(record);
         }
     }

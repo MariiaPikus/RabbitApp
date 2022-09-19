@@ -16,7 +16,7 @@ public class ScheduledTasks {
     @Autowired
     SendingInfo sendingInfo;
 
-    @Scheduled(fixedDelayString ="${time.rate}")
+    @Scheduled(fixedDelayString = "${time.rate}")
     public void reportInfo() throws JsonProcessingException {
         String msg = new ObjectMapper().writeValueAsString(sendingInfo);
         sender.produceMsg(msg);

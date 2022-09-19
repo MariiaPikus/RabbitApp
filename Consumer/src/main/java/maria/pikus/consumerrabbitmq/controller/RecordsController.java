@@ -1,9 +1,8 @@
 package maria.pikus.consumerrabbitmq.controller;
 
 import maria.pikus.consumerrabbitmq.entity.Record;
-import maria.pikus.consumerrabbitmq.servise.MessageService;
+import maria.pikus.consumerrabbitmq.servise.RecordsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,29 +14,22 @@ import java.util.List;
 public class RecordsController {
 
     @Autowired
-    MessageService messageService;
+    RecordsService recordsService;
 
     @GetMapping("/services")
     public List<String> getServices() {
-        return messageService.findRegisterServices();
+        return recordsService.findRegisterServices();
     }
 
     @GetMapping("/services/active")
     public List<String> getActiveServices() {
-        return messageService.findActiveServices();
+        return recordsService.findActiveServices();
     }
 
     @DeleteMapping("/services/{service}")
-    public void deleteService(@PathVariable(value = "service") String service){
-        List<Record> records = messageService.findByService(service);
-            messageService.delete(records);
-
+    public void deleteService(@PathVariable(value = "service") String service) {
+        List<Record> records = recordsService.findByService(service);
+        recordsService.delete(records);
     }
 
-
-//    @GetMapping("/services/{service}")
-//    public List<Record> gets(@PathVariable(value = "service") String service){
-//        List<Record> records = messageService.findByService(service);
-//       return records;
-//    }
 }
