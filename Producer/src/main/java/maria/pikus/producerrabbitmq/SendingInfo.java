@@ -24,7 +24,7 @@ public class SendingInfo {
         return message;
     }
 
-    public String getServiceUUID() {
+    public String getService() {
         return serviceUUID;
     }
 }

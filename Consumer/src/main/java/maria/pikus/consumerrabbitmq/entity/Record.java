@@ -1,17 +1,14 @@
 package maria.pikus.consumerrabbitmq.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
+@Table(schema = "public", name = "records")
 public class Record {
 
     @Id
@@ -19,13 +16,15 @@ public class Record {
     @GeneratedValue(generator = "increment")
     private long id;
 
-    private String serviceUUID;
+    @Column(name = "service")
+    private String service;
     private String message;
-    private String lastActiveDate;
+    @Column(name = "last_active_date")
+    private String timeAndDate;
 
-    public Record(String serviceUUID, String message, String lastActiveDate) {
-        this.serviceUUID = serviceUUID;
+    public Record(String service, String message, String timeAndDate) {
+        this.service = service;
         this.message = message;
-        this.lastActiveDate = lastActiveDate;
+        this.timeAndDate = timeAndDate;
     }
 }
