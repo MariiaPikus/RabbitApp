@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,19 +24,10 @@ public class MessageService {
 
 
     public void saveRecord (String msg) throws JsonProcessingException {
-
         ReceivedMessage receivedMessage = new ObjectMapper().readValue(msg, ReceivedMessage.class);
         String currentDataAndTime = LocalDateTime.now().toString();
-//        String currentDataAndTime = getCurrentDateAndTime();
-        messageRepo.save(new Record(receivedMessage.getServiceUUID(), receivedMessage.getMessage(), currentDataAndTime));
-
+        messageRepo.save(new Record(receivedMessage.getService(), currentDataAndTime));
     }
-
-//    private String getCurrentDateAndTime(){
-//        LocalDateTime now = LocalDateTime.now();
-//        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-//        return now.format(format);
-//    }
 
     public List<String> findRegisterServices(){
         return messageRepo.findDistinctServicedNames();
@@ -59,6 +49,16 @@ public class MessageService {
         }
 
         return result;
+    }
+
+    public List<Record> findByService(String service){
+        return messageRepo.findByService(service);
+    }
+
+    public void delete(List<Record> records){
+        for (Record record: records) {
+            messageRepo.delete(record);
+        }
     }
 
 }

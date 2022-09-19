@@ -18,13 +18,11 @@ public class Record {
 
     @Column(name = "service")
     private String service;
-    private String message;
-    @Column(name = "last_active_date")
+    @Column(name = "message_date")
     private String timeAndDate;
 
-    public Record(String service, String message, String timeAndDate) {
+    public Record(String service, String timeAndDate) {
         this.service = service;
-        this.message = message;
         this.timeAndDate = timeAndDate;
     }
 }

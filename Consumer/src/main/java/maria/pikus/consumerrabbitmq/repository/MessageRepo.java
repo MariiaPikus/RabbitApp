@@ -24,6 +24,9 @@ public interface MessageRepo extends CrudRepository<Record, Long> {
     @Query(value = "SELECT DISTINCT * FROM records", nativeQuery = true)
     List<Record> findDistinctServices();
 
-//    @Query(value = "SELECT * FROM Item ORDER BY id DESC LIMIT 5", nativeQuery = true)
-//    List<Item> getLastFive();
+
+    List<Record> findByService (String service);
+
+    void delete(Record record);
+
 }

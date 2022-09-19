@@ -1,30 +1,18 @@
 package maria.pikus.producerrabbitmq;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
-@JsonPropertyOrder({ "serviceUUID", "message"})
+//@JsonPropertyOrder({ "serviceUUID", "message"})
 @Component
 public class SendingInfo {
-    @Value("${send.massage}")
-    private String message;
-    private String serviceUUID;
-
-
+    private String service;
 
     public SendingInfo() {
-        this.serviceUUID= UUID.randomUUID().toString();
+        this.service = UUID.randomUUID().toString();
 
     }
-
-    public String getMessage() {
-        return message;
-    }
-
     public String getService() {
-        return serviceUUID;
+        return service;
     }
 }
