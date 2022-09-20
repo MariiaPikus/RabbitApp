@@ -35,19 +35,18 @@ public class RecordsService {
 
     public List<String> findActiveServices() {
         List<String> result = new ArrayList<>();
-
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime forActiveTime = now.minusNanos(timeServiceActive);
-        List<Record> allServices = messageRepo.findDistinctServices();
+        LocalDateTime forActiveTime = now.minusSeconds(timeServiceActive);
+        List<String> lastMessageFromServiceTime =
+                messageRepo.findLastMessageTime();
 
-        for (Record record : allServices) {
-            LocalDateTime lastActiveTime = LocalDateTime.parse(record.getTimeAndDate());
+        for (String dataAndTime : lastMessageFromServiceTime) {
+            LocalDateTime lastActiveTime = LocalDateTime.parse(dataAndTime);
             boolean isBefore = lastActiveTime.isBefore(forActiveTime);
-            if (isBefore) {
-                result.add(record.getService());
+            if (!isBefore) {
+                result.add(dataAndTime);
             }
         }
-
         return result;
     }
 
