@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  adminclient:
+    build: ./adminclient
+  consumer:
+    build: ./consumer
+    environment:
+      - TIME_RATE = 5000
+    ports:
+      - "8080:8080"
+  producer:
+    build: ./producer
+    environment:
+      - ACTIVE_TIME = 30000
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "dbforrabbit"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
